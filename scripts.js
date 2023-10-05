@@ -1,8 +1,8 @@
 // Déclaration des variables pour les noms des joueurs, scores, le joueur actuel et les éléments DOM
 let playerNames, scores, roundScore, activePlayer, gamePlaying;
-const playerNamesValue = [document.getElementById('name-1'), document.getElementById('name-2')];
-const globalScore = [document.getElementById('score-1'), document.getElementById('score-2')];
-const currentScore = [document.getElementById('current-1'), document.getElementById('current-2')];
+const playerNamesValue = [document.getElementById('name-0'), document.getElementById('name-1')];
+const globalScore = [document.getElementById('score-0'), document.getElementById('score-1')];
+const currentScore = [document.getElementById('current-0'), document.getElementById('current-1')];
 const dice = document.querySelector('.dice-img');
 
 // Fonction pour demander les noms des joueurs
@@ -35,11 +35,11 @@ function init() {
   currentScore[1].textContent = '0';
 
   // Supprimer les classes "winner" et "active" des éléments HTML des joueurs
+  document.querySelector('.player-0-panel').classList.remove('winner');
   document.querySelector('.player-1-panel').classList.remove('winner');
-  document.querySelector('.player-2-panel').classList.remove('winner');
+  document.querySelector('.player-0-panel').classList.remove('active');
   document.querySelector('.player-1-panel').classList.remove('active');
-  document.querySelector('.player-2-panel').classList.remove('active');
-  document.querySelector('.player-1-panel').classList.add('active');
+  document.querySelector('.player-0-panel').classList.add('active');
 }
 
 // Fonction pour passer au joueur suivant
@@ -54,19 +54,16 @@ function nextPlayer() {
   activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
 
   // Mettre en évidence le joueur actif dans l'interface graphique
+  document.querySelector('.player-0-panel').classList.toggle('active');
   document.querySelector('.player-1-panel').classList.toggle('active');
-  document.querySelector('.player-2-panel').classList.toggle('active');
 
   // Cacher le dé
   dice.style.display = 'none';
 }
 
-// Déclaration d'une variable pour indiquer si le jeu est en attente
-let gameWaiting = false;
-
 // Fonction pour gérer le lancer de dés
 function rollDice() {
-  if (gamePlaying && !gameWaiting) {
+  if (gamePlaying) {
     // Désactiver les boutons pendant 501ms
     disableButtons();
     
@@ -97,7 +94,7 @@ function rollDice() {
 // Fonction pour gérer le bouton "Hold"
 // Fonction pour gérer le bouton "Hold"
 function hold() {
-  if (gamePlaying && !gameWaiting) {
+  if (gamePlaying) {
     // Désactiver les boutons pendant 501ms
     disableButtons();
     
@@ -111,8 +108,8 @@ function hold() {
     if (scores[activePlayer] >= 100) {
       playerNamesValue[activePlayer].textContent += " l'emporte !";
       dice.style.display = 'none';
-      document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
       document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
+      document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
       gamePlaying = false;
     } else {
       // Passer au joueur suivant

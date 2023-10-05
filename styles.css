@@ -38,6 +38,10 @@ body {
   background-color: #f47a60;
 }
 
+.player-panel.winner {
+background-color: #34c924;
+}
+
 .center-panel {
   display: flex;
   flex-direction: column;
