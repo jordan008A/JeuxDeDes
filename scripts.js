@@ -78,7 +78,9 @@ function rollDice() {
       currentScore[activePlayer].textContent = roundScore;
     } else {
       // Passer au joueur suivant si le résultat du dé est 1
+      setTimeout(() => {
         nextPlayer();
+      }, 500);
     }
   }
 }
