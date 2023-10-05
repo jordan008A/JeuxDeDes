@@ -69,7 +69,7 @@ function rollDice() {
 
     // Afficher le résultat du lancer de dés dans l'interface graphique
     dice.style.display = 'block';
-    dice.src = `dice-${diceScore}.png`;
+    dice.src = `img/dice-${diceScore}.png`;
 
     // Mettre à jour le score ROUND si le résultat du dé n'est pas 1
     if (diceScore !== 1) {
@@ -78,7 +78,7 @@ function rollDice() {
       currentScore[activePlayer].textContent = roundScore;
     } else {
       // Passer au joueur suivant si le résultat du dé est 1
-      nextPlayer();
+        nextPlayer();
     }
   }
 }
