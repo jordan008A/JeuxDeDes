@@ -61,9 +61,15 @@ function nextPlayer() {
   dice.style.display = 'none';
 }
 
+// Déclaration d'une variable pour indiquer si le jeu est en attente
+let gameWaiting = false;
+
 // Fonction pour gérer le lancer de dés
 function rollDice() {
-  if (gamePlaying) {
+  if (gamePlaying && !gameWaiting) {
+    // Désactiver les boutons pendant 501ms
+    disableButtons();
+    
     // Générer un nombre aléatoire entre 1 et 6
     const diceScore = Math.floor(Math.random() * 6) + 1;
 
@@ -77,26 +83,33 @@ function rollDice() {
       roundScore += diceScore;
       currentScore[activePlayer].textContent = roundScore;
     } else {
-      // Passer au joueur suivant si le résultat du dé est 1
+      // Afficher le dé pendant 500ms avant de passer au joueur suivant
       setTimeout(() => {
         nextPlayer();
       }, 500);
     }
+    // Réactiver les boutons après 501ms
+    setTimeout(enableButtons, 501);
   }
 }
 
+
+// Fonction pour gérer le bouton "Hold"
 // Fonction pour gérer le bouton "Hold"
 function hold() {
-  if (gamePlaying) {
+  if (gamePlaying && !gameWaiting) {
+    // Désactiver les boutons pendant 501ms
+    disableButtons();
+    
     // Ajouter le score ROUND au score GLOBAL du joueur actif
     scores[activePlayer] += roundScore;
-
+    
     // Mettre à jour l'interface graphique
     globalScore[activePlayer].textContent = scores[activePlayer];
-
+    
     // Vérifier si le joueur a gagné
     if (scores[activePlayer] >= 100) {
-      playerNamesValue[activePlayer].textContent += " a gagné !";
+      playerNamesValue[activePlayer].textContent += " l'emporte !";
       dice.style.display = 'none';
       document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
       document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
@@ -105,10 +118,22 @@ function hold() {
       // Passer au joueur suivant
       nextPlayer();
     }
+    // Réactiver les boutons après 501ms
+    setTimeout(enableButtons, 501);
   }
 }
 
+// Fonction pour désactiver les boutons
+function disableButtons() {
+  document.querySelector('.btn-roll').setAttribute('disabled', 'true');
+  document.querySelector('.btn-hold').setAttribute('disabled', 'true');
+}
 
+// Fonction pour réactiver les boutons
+function enableButtons() {
+  document.querySelector('.btn-roll').removeAttribute('disabled');
+  document.querySelector('.btn-hold').removeAttribute('disabled');
+}
 // Événement pour lancer le dé
 document.querySelector('.btn-roll').addEventListener('click', rollDice);
 
