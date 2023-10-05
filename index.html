@@ -1,11 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jeux de dès</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Jeux de dés</title>
 </head>
 <body>
-  
+    <div class="wrapper">
+        <div class="player-panel player-1-panel active">
+            <div class="player-name" id="name-1">Joueur 1</div>
+            <div class="player-score" id="score-1">0</div>
+            <div class="player-current-box">
+                <div class="player-current-label">Score courant</div>
+                <div class="player-current-score" id="current-1">0</div>
+            </div>
+        </div>
+        <div class="center-panel">
+            <button class="btn-new">Nouvelle partie</button>
+            <div class="dice">
+                <img src="" alt="Dé" class="dice-img">
+            </div>
+            <button class="btn-roll">Lancer les dés</button>
+            <button class="btn-hold">Hold</button>
+        </div>
+        <div class="player-panel player-2-panel">
+            <div class="player-name" id="name-2">Joueur 2</div>
+            <div class="player-score" id="score-2">0</div>
+            <div class="player-current-box">
+                <div class="player-current-label">Score courant</div>
+                <div class="player-current-score" id="current-2">0</div>
+            </div>
+        </div>
+    </div>
+    <script src="scripts.js"></script>
 </body>
 </html>
